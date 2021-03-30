@@ -4,7 +4,7 @@ import Navbar from './components/Navbar'
 import PhotoList from './components/PhotoList'
 import usePageBottom from './helpers/hooks/usePageBottom'
 
-export default function App (photo) {
+export default function App () {
 
   const [user, setUser] = useState('Denny Sihol Ronaldo')
   const [photos, setPhotos] = useState([])
@@ -37,7 +37,7 @@ export default function App (photo) {
       <div className="container">
         <div className="row">
           {
-            photos.length > 0 && photos.map((photo, i) => {
+            photos.length > 0 && photos.map((photo) => {
               return  (
                 <PhotoList photo={photo} key={photo.id}></PhotoList>
               )
