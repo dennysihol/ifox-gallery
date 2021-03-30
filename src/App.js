@@ -16,7 +16,7 @@ export default class App extends Component {
   }  
 
   getDataApi = () => {
-    fetch('https://picsum.photos/v2/list?page=1&limit=12')
+    fetch('https://picsum.photos/v2/list?page=10&limit=12')
       .then(res => res.json())
       .then(res => {
         console.log(res);
@@ -39,7 +39,15 @@ export default class App extends Component {
         <br/>
         <h1>Hello { user } !</h1>
         <br/>
-        <PhotoList photos={photos}></PhotoList>
+        <div className="container">
+          <div className="row">
+            {
+              photos.map(photo => {
+                return  <PhotoList photo={photo} key={photo.id}></PhotoList>
+              })
+            }
+          </div>
+        </div>
       </div>
       )
   }
