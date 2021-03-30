@@ -2,29 +2,31 @@ import './App.css';
 import React, { useEffect, useState } from 'react'
 import Navbar from './components/Navbar'
 import PhotoList from './components/PhotoList'
-import usePageBottom from './helpers/hooks/usePageBottom';
-
-
+import usePageBottom from './helpers/hooks/usePageBottom'
 
 export default function App (photo) {
 
   const [user, setUser] = useState('Denny Sihol Ronaldo')
   const [photos, setPhotos] = useState([])
-  const isPageBottom = usePageBottom()
+  const [page, setPage] = useState(1)
+  const isPageBottom = usePageBottom();
   
   useEffect(() => {
-    fetch('https://picsum.photos/v2/list')
+    fetch(`https://picsum.photos/v2/list?page=${page}`)
     .then(res => res.json())
-    .then(res => {
-      setPhotos(res)
-    });
-    if (!isPageBottom || !photos) return;
-    fetch('https://picsum.photos/v2/list')
-    .then(res => res.json())
-    .then(res => {
-      setPhotos(res)
-    });
-  }, [isPageBottom])
+    .then(json => setPhotos([...photos, ...json]));
+  }, [page])
+
+  const ScrollToEnd = () => {
+    setPage(page+1)
+  }
+
+  window.onscroll = function () {
+    if(isPageBottom){
+      console.log('sampe bawah');
+      ScrollToEnd()
+    }
+  }
 
   return (
     <div>
@@ -35,7 +37,7 @@ export default function App (photo) {
       <div className="container">
         <div className="row">
           {
-            photos.map(photo => {
+            photos.length > 0 && photos.map((photo, i) => {
               return  (
                 <PhotoList photo={photo} key={photo.id}></PhotoList>
               )

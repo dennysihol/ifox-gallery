@@ -5,9 +5,7 @@ export default function usePageBottom() {
 
   React.useEffect(() => {
     function handleScroll() {
-      const isBottom =
-        window.innerHeight + document.documentElement.scrollTop 
-        === document.documentElement.offsetHeight;
+      const isBottom = Math.ceil(window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight
       setBottom(isBottom);
     }
     window.addEventListener("scroll", handleScroll);
