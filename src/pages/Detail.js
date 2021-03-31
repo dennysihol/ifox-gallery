@@ -27,7 +27,6 @@ export default function Detail() {
                     <h4>Width : {photo.width}</h4>
                     <h4>Height : {photo.height}</h4>
                     <h4>URL : <a href={photo.url} target="_blank">{photo.url}</a></h4>
-                    <button className="btn btn-danger">Add to Favorites</button>
                 </div>
             </div>
             

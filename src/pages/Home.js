@@ -2,17 +2,22 @@ import React, { useEffect, useState } from 'react'
 import PhotoList from '../components/PhotoList'
 import usePageBottom from '../helpers/hooks/usePageBottom'
 
+
 export default function Home() {
 
     const [user, setUser] = useState('Folks')
     const [photos, setPhotos] = useState([])
     const [page, setPage] = useState(1)
+    const [isLoading, setIsLoading] = useState(false)
     const isPageBottom = usePageBottom();
     
     useEffect(() => {
+        setIsLoading(true)
         fetch(`https://picsum.photos/v2/list?page=${page}`)
         .then(res => res.json())
-        .then(json => setPhotos([...photos, ...json]));
+        .then(json => setPhotos([...photos, ...json]))
+        .catch(err => console.log(err))
+        .finally(_ => setIsLoading(false))
     }, [page])
 
     const ScrollToEnd = () => {
@@ -26,6 +31,7 @@ export default function Home() {
         }
     }
 
+    if(isLoading) return <h3>Loading...</h3>
     return (
         <div>
             <h1 style={{textAlign: "center"}}>Hello {user} !</h1>
