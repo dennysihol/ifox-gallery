@@ -4,14 +4,16 @@ import Swal from 'sweetalert2'
 import { useHistory } from "react-router-dom";
 
 
+
 export default function PhotoList ({photo}) {
+    
+    let history = useHistory()
     
     const showAuthor = (e) => {
         e.preventDefault()
         Swal.fire('Author :', photo.author)
     }
 
-    let history = useHistory();
     const goToDetail = (id) => {
         history.push(`/detail/${id}`)
     }

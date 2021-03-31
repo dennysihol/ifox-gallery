@@ -4,7 +4,7 @@ import usePageBottom from '../helpers/hooks/usePageBottom'
 
 export default function Home() {
 
-    const [user, setUser] = useState('Denny Sihol Ronaldo')
+    const [user, setUser] = useState('Folks')
     const [photos, setPhotos] = useState([])
     const [page, setPage] = useState(1)
     const isPageBottom = usePageBottom();
@@ -28,7 +28,7 @@ export default function Home() {
 
     return (
         <div>
-            <h1>Hello {user} !</h1>
+            <h1 style={{textAlign: "center"}}>Hello {user} !</h1>
             <div className="container">
                 <div className="row">
                 {
