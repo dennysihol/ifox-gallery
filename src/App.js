@@ -1,50 +1,33 @@
 import './App.css';
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Navbar from './components/Navbar'
-import PhotoList from './components/PhotoList'
-import usePageBottom from './helpers/hooks/usePageBottom'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+import Home from './pages/Home'
+import Detail from './pages/Detail'
+import Favorites from './pages/Favorites'
 
-export default function App () {
-
-  const [user, setUser] = useState('Denny Sihol Ronaldo')
-  const [photos, setPhotos] = useState([])
-  const [page, setPage] = useState(1)
-  const isPageBottom = usePageBottom();
-  
-  useEffect(() => {
-    fetch(`https://picsum.photos/v2/list?page=${page}`)
-    .then(res => res.json())
-    .then(json => setPhotos([...photos, ...json]));
-  }, [page])
-
-  const ScrollToEnd = () => {
-    setPage(page+1)
-  }
-
-  window.onscroll = function () {
-    if(isPageBottom){
-      console.log('sampe bawah');
-      ScrollToEnd()
-    }
-  }
+export default function App () { 
 
   return (
-    <div>
-      <Navbar></Navbar>
-      <br/>
-      <h1>Hello {user} !</h1>
-      <br/>
-      <div className="container">
-        <div className="row">
-          {
-            photos.length > 0 && photos.map((photo) => {
-              return  (
-                <PhotoList photo={photo} key={photo.id}></PhotoList>
-              )
-            })
-          }
+      <Router>
+        <Navbar></Navbar>
+        <div>
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/detail/:id">
+              <Detail />
+            </Route>
+            <Route path="/favorites">
+              <Favorites />
+            </Route>
+          </Switch>
         </div>
-      </div>
-    </div>
+      </Router>
     )
 }
