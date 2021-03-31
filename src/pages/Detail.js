@@ -9,10 +9,10 @@ export default function Detail() {
     useEffect(() => {
         setIsLoading(true)
         fetch(`https://picsum.photos/id/${id}/info`)
-        .then(res => res.json())
-        .then(photo => setPhoto(photo))
-        .catch(err => console.log(err))
-        .finally(_ => setIsLoading(false))
+            .then(res => res.json())
+            .then(photo => setPhoto(photo))
+            .catch(err => console.log(err))
+            .finally(_ => setIsLoading(false))
     }, [])
 
     if(isLoading) return <h3>Loading...</h3>

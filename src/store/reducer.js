@@ -1,16 +1,13 @@
-import { createStore } from 'redux'
-
 const initialState = {
     favorites: []
 }
 
 function reducer (state = initialState, action) {
+    const { payload } = action
     if(action.type === 'favorite/added') {
-        return { ...state, counter: state.counter + 1}
+        return { ...state, favorites: state.favorites.concat(payload)}
     }
     return state
 }
 
-const store = createStore(reducer)
-
-export default store
+export default reducer
