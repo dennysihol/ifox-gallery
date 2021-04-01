@@ -1,13 +1,14 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import deleteFav from '../store/actions/deleteFav'
 
 export default function Favorites() {
 
-    const favorites = useSelector(state => state.favorites)
+    const favorites = useSelector(state => state.favorites.data)
+    const dispatch = useDispatch()
 
-    const deleteFav = (favId) => {
-        let removeIndex = favorites.map(fav => { return fav.id; }).indexOf(favId);
-        favorites.splice(removeIndex, 1)
+    const deleteById = (fav) => {
+        dispatch(deleteFav(fav))
     }
 
     return (
@@ -21,7 +22,7 @@ export default function Favorites() {
                                 <div className="card" style={{margin: "10px"}}>
                                     <img src={fav.download_url} className="card-img-top" alt="Photo" />
                                     <div className="topright" style={{position: "absolute", top: "8px", right: "16px", fontSize: "18px"}}> 
-                                        <a className="btn" onClick={() => deleteFav(fav.id)}>
+                                        <a className="btn" onClick={() => deleteById(fav)}>
                                             <img src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678087-heart-512.png" style={{height: "25px"}} alt="love"/>   
                                         </a>
                                     </div>

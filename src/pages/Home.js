@@ -1,23 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import PhotoList from '../components/PhotoList'
 import usePageBottom from '../helpers/hooks/usePageBottom'
-
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchPhotosAsync } from '../store/actions/fetchPhotos'
 
 export default function Home() {
 
-    const [user, setUser] = useState('Folks')
-    const [photos, setPhotos] = useState([])
+    const [user, setUser] = useState('Folks')    
     const [page, setPage] = useState(1)
-    const [isLoading, setIsLoading] = useState(false)
     const isPageBottom = usePageBottom();
+    const dispatch = useDispatch()
+    const photos = useSelector(state => state.photos.data)
     
     useEffect(() => {
-        setIsLoading(true)
-        fetch(`https://picsum.photos/v2/list?page=${page}`)
-            .then(res => res.json())
-            .then(json => setPhotos([...photos, ...json]))
-            .catch(err => console.log(err))
-            .finally(_ => setIsLoading(false))
+        dispatch(fetchPhotosAsync(page))
     }, [page])
 
     const ScrollToEnd = () => {
@@ -30,7 +26,6 @@ export default function Home() {
         }
     }
 
-    if(isLoading) return <h3>Loading...</h3>
     return (
         <div>
             <h1 style={{textAlign: "center"}}>Hello {user} !</h1>

@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Swal from 'sweetalert2'
 import { useHistory } from "react-router-dom";
 import { useDispatch } from 'react-redux'
+import addToFavorites from '../store/actions/favorites'
 
 
 
@@ -18,7 +19,7 @@ export default function PhotoList ({photo}) {
             icon: 'success',
             title: 'Favorites Added'
           })
-        dispatch({type: 'favorite/added', payload: favPhoto})
+        dispatch(addToFavorites(favPhoto))
     }
 
     const goToDetail = (id) => {

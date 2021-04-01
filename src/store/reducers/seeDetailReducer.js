@@ -1,11 +1,13 @@
 const initialState = {
-    favorites: []
+    data: [],
+    loading: false,
+    error: null
 }
 
 function reducer (state = initialState, action) {
     const { payload } = action
-    if(action.type === 'favorite/added') {
-        return { ...state, favorites: state.favorites.concat(payload)}
+    if(action.type === 'detail/get') {
+        return { ...state, data: payload}
     }
     return state
 }

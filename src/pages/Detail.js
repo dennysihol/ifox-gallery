@@ -1,21 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { getDetailAsync } from '../store/actions/getDetail'
 
 export default function Detail() {
     const { id } = useParams()
-    const [isLoading, setIsLoading] = useState(false)
-    const [photo, setPhoto] = useState([])
+    const photo = useSelector(state => state.photo.data)
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        setIsLoading(true)
-        fetch(`https://picsum.photos/id/${id}/info`)
-            .then(res => res.json())
-            .then(photo => setPhoto(photo))
-            .catch(err => console.log(err))
-            .finally(_ => setIsLoading(false))
+        dispatch(getDetailAsync(id))
     }, [])
 
-    if(isLoading) return <h3>Loading...</h3>
     return (
         <div className='container' style={{margin: "20px"}}>
             <div className='row'>
