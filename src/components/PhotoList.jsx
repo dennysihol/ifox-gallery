@@ -12,7 +12,8 @@ export default function PhotoList ({photo}) {
 
     let history = useHistory()
 
-    const addToFavorite = (favPhoto) => {
+    const addToFavorite = (favPhoto, e) => {
+        e.preventDefault()
         Swal.fire({
             icon: 'success',
             title: 'Favorites Added'
@@ -30,7 +31,7 @@ export default function PhotoList ({photo}) {
                 <img src={photo.download_url} className="card-img-top" alt="Photo" />
                 <button className="btn btn-info" onClick={() => goToDetail(photo.id)}>Show Detail</button>
                 <div className="topright" style={{position: "absolute", top: "8px", right: "16px", fontSize: "18px"}}> 
-                    <a href='#' className="btn" onClick={() => addToFavorite(photo)}>
+                    <a href='#' className="btn" onClick={(e) => addToFavorite(photo, e)}>
                         <img src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678087-heart-512.png" style={{height: "25px"}} alt="love"/>   
                     </a>
                 </div>

@@ -14,10 +14,10 @@ export default function Home() {
     useEffect(() => {
         setIsLoading(true)
         fetch(`https://picsum.photos/v2/list?page=${page}`)
-        .then(res => res.json())
-        .then(json => setPhotos([...photos, ...json]))
-        .catch(err => console.log(err))
-        .finally(_ => setIsLoading(false))
+            .then(res => res.json())
+            .then(json => setPhotos([...photos, ...json]))
+            .catch(err => console.log(err))
+            .finally(_ => setIsLoading(false))
     }, [page])
 
     const ScrollToEnd = () => {
@@ -26,7 +26,6 @@ export default function Home() {
 
     window.onscroll = function () {
         if(isPageBottom){
-        console.log('sampe bawah');
         ScrollToEnd()
         }
     }

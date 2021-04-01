@@ -6,9 +6,7 @@ export default function Favorites() {
     const favorites = useSelector(state => state.favorites)
 
     const deleteFav = (favId) => {
-        console.log(favId);
         let removeIndex = favorites.map(fav => { return fav.id; }).indexOf(favId);
-        console.log(removeIndex);
         favorites.splice(removeIndex, 1)
     }
 
