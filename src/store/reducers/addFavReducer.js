@@ -5,11 +5,11 @@ const initialState = {
 }
 
 function reducer (state = initialState, action) {
-    const { index, payload } = action
-    if(action.type === 'favorite/added') {
+    const { index, type, payload } = action
+    if(type === 'favorite/added') {
         return { ...state, data: state.data.concat(payload)}
-    } else if(action.type === 'favorite/delete') {
-        return { ...state, data: state.data.splice(index, 1)}
+    } else if(type === 'favorite/delete') {
+        return { ...state, data: state.data.filter(item => item !== index)}
     }
     return state
 }

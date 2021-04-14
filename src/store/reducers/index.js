@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 
-import addFavReducer from './addFavReducer.js'
+import addFavReducer from './addFavReducer'
 import fetchPhotosReducer from './fetchPhotosReducer'
 import seeDetailReducer from "./seeDetailReducer";
 

@@ -6,7 +6,7 @@ import { fetchPhotosAsync } from '../store/actions/fetchPhotos'
 
 export default function Home() {
 
-    const [user, setUser] = useState('Folks')    
+    const [user] = useState('Folks')    
     const [page, setPage] = useState(1)
     const isPageBottom = usePageBottom();
     const dispatch = useDispatch()
@@ -14,7 +14,7 @@ export default function Home() {
     
     useEffect(() => {
         dispatch(fetchPhotosAsync(page))
-    }, [page])
+    }, [page, dispatch])
 
     const ScrollToEnd = () => {
         setPage(page+1)
@@ -32,9 +32,9 @@ export default function Home() {
             <div className="container">
                 <div className="row">
                 {
-                    photos.length > 0 && photos.map((photo) => {
+                    photos.length > 0 && photos.map((item) => {
                     return  (
-                        <PhotoList photo={photo} key={photo.id}></PhotoList>
+                        <PhotoList photo={item} key={item.id}></PhotoList>
                     )
                     })
                 }

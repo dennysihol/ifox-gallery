@@ -10,19 +10,19 @@ export default function Detail() {
 
     useEffect(() => {
         dispatch(getDetailAsync(id))
-    }, [])
+    }, [dispatch, id])
 
     return (
         <div className='container' style={{margin: "20px"}}>
             <div className='row'>
                 <div className='col-6'>
-                <img src={photo.download_url} alt="Photo" style={{width: "100%", borderRadius: "10px"}}/>
+                <img src={photo.download_url} alt="detail" style={{width: "100%", borderRadius: "10px"}}/>
                 </div>
                 <div className='col-6'>
                     <h3>Author : {photo.author}</h3>
                     <h4>Width : {photo.width}</h4>
                     <h4>Height : {photo.height}</h4>
-                    <h4>URL : <a href={photo.url} target="_blank">{photo.url}</a></h4>
+                    <h4>URL : <a href={photo.url} target="_blank" rel="noreferrer">{photo.url}</a></h4>
                 </div>
             </div>
             
