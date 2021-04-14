@@ -1,8 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useHistory, useRouteMatch } from "react-router-dom";
 import { useDispatch } from 'react-redux'
-import addToFavoritesAsync from '../store/actions/favorites'
-import deleteFavAsync from '../store/actions/deleteFav'
+import { addToFavoritesAsync } from '../store/actions/favorites'
+import { deleteFav } from '../store/actions/deleteFav'
 
 export default function PhotoList ({photo}) {    
 
@@ -18,7 +18,7 @@ export default function PhotoList ({photo}) {
 
     const deleteById = (e, favPhoto) => {
         e.preventDefault()
-        dispatch(deleteFavAsync(favPhoto))
+        dispatch(deleteFav(favPhoto))
     }
 
     const goToDetail = (id) => {
